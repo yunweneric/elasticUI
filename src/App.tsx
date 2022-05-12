@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC } from "react";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles from "./components/styles/GlobalStyles";
+import Login from "./pages/Login";
+import { Routes, Route } from "react-router-dom";
+import SignUp from "./pages/Signup";
 
-function App() {
+const theme = {
+  colors: {
+    body: "#282C34",
+  },
+};
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <>
+        <GlobalStyles />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+        </Routes>
+      </>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
