@@ -11,7 +11,7 @@ export const CardContainer = styled.div`
   h2,
   p,
   h3,
-  h4 {
+  .forgot {
     text-align: center;
   }
   h2 {
@@ -29,15 +29,17 @@ export const CardContainer = styled.div`
     margin-top: 10px;
     color: #878b95;
   }
-  h4,
+  .forgot a,
   span a {
     color: #35a3ef;
     font-size: 12px;
     text-decoration: none;
   }
-  span a,
-  h4 {
+  span a {
     margin: 40px 0;
+  }
+  .forgot {
+    margin: 20px;
   }
   .social-alt {
     display: flex;
@@ -73,6 +75,15 @@ export const CardContainer = styled.div`
   .passwordField {
     position: relative;
   }
+  .lockSVG {
+    width: 100%;
+    text-align: center;
+  }
+  .lockSVG img {
+    width: 50%;
+    margin: 0 auto;
+  }
+
   .password-pop {
     box-shadow: 0 0.9px 4px -1px rgb(0 0 0 / 20%),
       0 2.6px 8px -1px rgb(0 0 0 / 15%), 0 5.7px 12px -1px rgb(0 0 0 / 13%),
@@ -106,6 +117,17 @@ export const CardContainer = styled.div`
   .password-pop hr {
     margin: 20px 0;
     border: 1px solid #353741;
+  }
+
+  .validation {
+    background-color: #4a201e;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+  }
+  .validation span {
+    margin-left: 10px;
+    color: #f98982;
   }
 
   /* Extra small devices (phones, 600px and down) */

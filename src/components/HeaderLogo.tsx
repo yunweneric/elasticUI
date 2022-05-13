@@ -29,6 +29,8 @@ const HeaderLogo = ({ page }: HeaderProps) => {
             </p>
           </div>
         );
+      case "forgot":
+        return <div></div>;
 
       default:
         break;
@@ -36,9 +38,9 @@ const HeaderLogo = ({ page }: HeaderProps) => {
   };
   return (
     <HeaderStyles>
-      <div></div>
-      <div>
-        <img src="/assets/images/elas.svg" alt="" />
+      <div className="empty"></div>
+      <div className="img">
+        <img src="/assets/images/elass.png" alt="" />
       </div>
       <>{renderAction()}</>
     </HeaderStyles>

@@ -47,6 +47,17 @@ const ButtonStyles = styled.div`
     color: #36a2ef;
     margin-left: 10px;
   }
+
+  /* Extra small devices (phones, 600px and down) */
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button {
+      width: 99%;
+      margin: 5px 0;
+    }
+  }
 `;
 
 export default SocialButtons;

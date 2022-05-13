@@ -8,12 +8,22 @@ interface SubmitButtonProps {
 export const SubmitButton = ({ title, status }: SubmitButtonProps) => {
   return (
     <div>
-      <button disabled={status} style={buttonStyle}>
+      <button disabled={status} style={status ? buttonStyle : buttonStyleDis}>
         {title}
       </button>
     </div>
   );
 };
+const buttonStyleDis = {
+  width: "100%",
+  margin: "0 auto",
+  padding: "10px",
+  borderRadius: "5px",
+  border: "none",
+  backgroundColor: "#36a2ef",
+  color: "#000",
+};
+
 const buttonStyle = {
   width: "100%",
   margin: "0 auto",

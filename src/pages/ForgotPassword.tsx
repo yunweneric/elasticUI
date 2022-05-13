@@ -1,9 +1,14 @@
-import React, { FC } from 'react'
+import React, { FC } from "react";
+import ForgotPasswordCard from "../components/ForgotPasswordCard";
+import HeaderLogo from "../components/HeaderLogo";
 
 const ForgotPassword: FC = () => {
-    return (
-        <div>ForgotPassword</div>
-    )
-}
+  return (
+    <div>
+      <HeaderLogo page="forgot" />
+      <ForgotPasswordCard />
+    </div>
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;
