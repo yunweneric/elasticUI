@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import { BtnStates, InputEnum, PasswordStates } from "../interfaces/enums";
+import { BtnStates, PasswordStates } from "../interfaces/enums";
 import { validatePassword } from "../utils/helpers";
 import { InputStyle } from "./styles/inputStyles";
 
@@ -16,7 +16,6 @@ const PasswordField: FC<PasswordInterface> = ({
   );
   const [trackBtn, setTrackBtn] = useState<BtnStates>(BtnStates.btnDisabled);
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
-  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   useEffect(() => {
     updatePasswordUI("");
@@ -24,12 +23,11 @@ const PasswordField: FC<PasswordInterface> = ({
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    if (page == "signUp") updatePasswordUI(e.target.value);
+    if (page === "signUp") updatePasswordUI(e.target.value);
     if (page === "login") {
       if (e.target.value.length > 0) {
         setTrackBtn(BtnStates.btnEnabled);
         func(trackBtn);
-        console.log({ password: e.target.value });
       }
     }
   };
@@ -95,8 +93,8 @@ const PasswordField: FC<PasswordInterface> = ({
             color:
               isPasswordText === PasswordStates.passwordClean
                 ? "white"
-                : isPasswordText === PasswordStates.passwordInvalid ||
-                  page != "login"
+                : isPasswordText === PasswordStates.passwordInvalid &&
+                  page !== "login"
                 ? "red"
                 : "#36A4EF",
           }}
