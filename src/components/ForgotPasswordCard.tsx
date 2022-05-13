@@ -10,7 +10,6 @@ const ForgotPasswordCard: FC = () => {
     InputEnumEmail.emailEmpty
   );
   const pull_data = (data: string) => {
-    console.log(data);
     if (data === InputEnumEmail.emailValid) {
       setEmailValid(InputEnumEmail.emailValid);
     }

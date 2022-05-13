@@ -95,7 +95,7 @@ const PasswordField: FC<PasswordInterface> = ({
             color:
               isPasswordText === PasswordStates.passwordClean
                 ? "white"
-                : isPasswordText === PasswordStates.passwordInvalid &&
+                : isPasswordText === PasswordStates.passwordInvalid ||
                   page != "login"
                 ? "red"
                 : "#36A4EF",

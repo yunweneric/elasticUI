@@ -3,16 +3,24 @@ import SubmitButton from "./SubmitButton";
 import SocialButtons from "./SocialButtons";
 import { Link } from "react-router-dom";
 import { InputEnum, InputEnumEmail, PasswordStates } from "../interfaces/enums";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
 
 const SignUpCard: FC = () => {
   const [validPassword, setValidPassword] = useState<InputEnum | string>("");
-  useEffect(() => {});
-  const pull_data = (data: PasswordStates) => {
+  const [validEmail, setValidEmail] = useState<InputEnumEmail>(
+    InputEnumEmail.emailEmpty
+  );
+  const pull_data = (data: PasswordStates | InputEnumEmail) => {
     console.log(data);
     switch (data) {
+      case InputEnumEmail.emailValid:
+        setValidEmail(data);
+        break;
+      case InputEnumEmail.emailInValid:
+        setValidEmail(data);
+        break;
       case PasswordStates.passwordValid:
         setValidPassword(PasswordStates.passwordValid);
         break;
@@ -40,7 +48,7 @@ const SignUpCard: FC = () => {
     }
   };
 
-  console.log("validPassword ", validPassword);
+  console.log(validEmail, validPassword);
 
   return (
     <CardContainer>
@@ -88,7 +96,15 @@ const SignUpCard: FC = () => {
           )}
         </div>
 
-        <SubmitButton title="Start free trial" status={true} />
+        <SubmitButton
+          title="Start free trial"
+          status={
+            validEmail === InputEnumEmail.emailValid &&
+            validPassword === PasswordStates.passwordValid
+              ? false
+              : true
+          }
+        />
         <div className="social-alt">
           <div></div>
           <span>Or sign up with</span>

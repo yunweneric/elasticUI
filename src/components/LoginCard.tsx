@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
 import { FC, useState } from "react";
-import { BtnStates, InputEnumEmail, PasswordStates } from "../interfaces/enums";
+import { BtnStates, InputEnumEmail } from "../interfaces/enums";
 const LoginCard: FC = () => {
   const [btnStatus, setBtnStatus] = useState<BtnStates>(BtnStates.btnDisabled);
   const [emailStatus, setEmailStatus] = useState<InputEnumEmail>(
@@ -14,14 +14,13 @@ const LoginCard: FC = () => {
 
   const pull_data = (data: string) => {
     if (data === BtnStates.btnEnabled) {
-      setBtnStatus(BtnStates.btnEnabled);
+      setBtnStatus(data);
     }
     if (data === InputEnumEmail.emailValid) {
-      setEmailStatus(InputEnumEmail.emailValid);
+      setEmailStatus(data);
     } else if (data === InputEnumEmail.emailInValid) {
-      setEmailStatus(InputEnumEmail.emailInValid);
+      setEmailStatus(data);
     }
-    console.log(emailStatus, btnStatus);
   };
   return (
     <CardContainer>
