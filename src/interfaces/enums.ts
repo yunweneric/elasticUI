@@ -28,7 +28,9 @@ export enum PasswordStates {
     passwordClean = "passwordClean",
     passwordFocused = 'passwordFocused',
     passwordValidLength = 'passwordValidLength',
-    specialCharValid = 'specialCharValid'
+    specialCharValid = 'specialCharValid',
+    specialCharInValid = 'specialCharInValid'
+
 
 }
 export enum BtnStates {

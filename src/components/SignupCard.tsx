@@ -1,42 +1,46 @@
 import { CardContainer } from "./styles/CardContainer";
-import InputField from "./inputField";
 import SubmitButton from "./SubmitButton";
 import SocialButtons from "./SocialButtons";
 import { Link } from "react-router-dom";
-import { InputEnum, InputEnumEmail } from "../interfaces/enums";
-import { FC, useState } from "react";
+import { InputEnum, InputEnumEmail, PasswordStates } from "../interfaces/enums";
+import { FC, useEffect, useState } from "react";
 import EmailField from "./EmailField";
+import PasswordField from "./PasswordField";
 
 const SignUpCard: FC = () => {
   const [validPassword, setValidPassword] = useState<InputEnum | string>("");
-
-  const pull_data = (data: InputEnum | InputEnumEmail) => {
+  useEffect(() => {});
+  const pull_data = (data: PasswordStates) => {
     console.log(data);
-    console.log({ data: data });
     switch (data) {
-      case InputEnum.valid && InputEnumEmail.emailValid:
-        setValidPassword(InputEnum.valid);
+      case PasswordStates.passwordValid:
+        setValidPassword(PasswordStates.passwordValid);
         break;
-      case InputEnum.valid:
-        setValidPassword(InputEnum.valid);
+      case PasswordStates.passwordInvalid:
+        setValidPassword(PasswordStates.passwordInvalid);
         break;
-
-      case InputEnum.inValid:
-        setValidPassword(InputEnum.inValid);
-        break;
-
-      case InputEnum.lengthValid:
-        setValidPassword(InputEnum.lengthValid);
-        break;
-      case InputEnum.empty:
-        setValidPassword(InputEnum.empty);
+      case PasswordStates.specialCharInValid:
+        setValidPassword(PasswordStates.specialCharInValid);
         break;
 
-      case InputEnum.specialCharValid:
-        setValidPassword(InputEnum.specialCharValid);
+      case PasswordStates.passwordValidLength:
+        setValidPassword(PasswordStates.passwordValidLength);
+        break;
+      case PasswordStates.passwordFocused:
+        setValidPassword(PasswordStates.passwordFocused);
+
+        break;
+      case PasswordStates.passwordClean:
+        setValidPassword(PasswordStates.passwordClean);
+        break;
+
+      case PasswordStates.specialCharValid:
+        setValidPassword(PasswordStates.specialCharValid);
         break;
     }
   };
+
+  console.log("validPassword ", validPassword);
 
   return (
     <CardContainer>
@@ -45,23 +49,16 @@ const SignUpCard: FC = () => {
       <form action="">
         <EmailField func={pull_data} page="signUp" />
         <div className="passwordField">
-          <InputField
-            func={pull_data}
-            label="password"
-            title="Password"
-            icon="/assets/svgs/passwordIcon.svg"
-            suffixIcon="/assets/svgs/eyeIcon.svg"
-            page="signUp"
-          />
-          {validPassword === InputEnum.valid ||
-          validPassword === InputEnum.empty ? (
+          <PasswordField func={pull_data} page="signUp" />
+          {validPassword === PasswordStates.passwordClean ||
+          validPassword === PasswordStates.passwordValid ? (
             <></>
           ) : (
             <div className="password-pop">
               <p>Your password must:</p>
               <div className="criteria">
-                {validPassword === InputEnum.lengthValid ||
-                validPassword === InputEnum.valid ? (
+                {validPassword === PasswordStates.passwordValidLength ||
+                validPassword === PasswordStates.passwordValid ? (
                   <img src="/assets/svgs/checkIconValid.svg" alt="" />
                 ) : (
                   <img src="/assets/svgs/checkIcon.svg" alt="" />
@@ -69,7 +66,7 @@ const SignUpCard: FC = () => {
                 <span>Be a minimum of 8 characters</span>
               </div>
               <div className="criteria">
-                {validPassword === InputEnum.valid ? (
+                {validPassword === PasswordStates.specialCharInValid ? (
                   <img src="/assets/svgs/checkIconValid.svg" alt="" />
                 ) : (
                   <img src="/assets/svgs/checkIcon.svg" alt="" />

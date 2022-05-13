@@ -18,8 +18,15 @@ export const validatePassword = (password: string): PasswordStates => {
     if (password.length >= 15) {
         return PasswordStates.passwordValid;
     }
+
     if (password.length === 0) {
         return PasswordStates.passwordClean;
+    }
+    if (password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) !== null && password.length >= 8) {
+        return PasswordStates.passwordValid;
+    }
+    if (password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) !== null && password.length <= 8) {
+        return PasswordStates.specialCharInValid;
     }
     if (password.length < 8) {
         return PasswordStates.passwordInvalid;
@@ -30,9 +37,7 @@ export const validatePassword = (password: string): PasswordStates => {
         }
         return PasswordStates.passwordValidLength;
     }
-    if (password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) !== null) {
-        return PasswordStates.specialCharValid;
-    }
+
 
     return PasswordStates.passwordInvalid;
 }

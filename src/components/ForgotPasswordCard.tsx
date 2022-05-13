@@ -1,12 +1,25 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { CardContainer } from "./styles/CardContainer";
-import InputField from "./inputField";
 import SubmitButton from "./SubmitButton";
+import ForgotPasswordEmailField from "./ForgotPasswordEmailField";
+import { InputEnumEmail } from "../interfaces/enums";
 
 const ForgotPasswordCard: FC = () => {
+  const [emailValid, setEmailValid] = useState<InputEnumEmail>(
+    InputEnumEmail.emailEmpty
+  );
   const pull_data = (data: string) => {
     console.log(data);
+    if (data === InputEnumEmail.emailValid) {
+      setEmailValid(InputEnumEmail.emailValid);
+    }
+    if (data === InputEnumEmail.signUpEmail) {
+      setEmailValid(InputEnumEmail.signUpEmail);
+    }
+    if (data === InputEnumEmail.emailEmpty) {
+      setEmailValid(InputEnumEmail.emailEmpty);
+    }
   };
   return (
     <div>
@@ -20,18 +33,22 @@ const ForgotPasswordCard: FC = () => {
           link.
         </h3>
         <form action="">
-          <InputField
-            func={pull_data}
-            label="email"
-            title="Email"
-            icon=""
-            page="forgot"
+          <ForgotPasswordEmailField page="forgot" func={pull_data} />
+          <SubmitButton
+            title="Reset password"
+            status={emailValid === InputEnumEmail.emailEmpty ? true : false}
           />
-          <SubmitButton title="Reset password" status={false} />
           <div className="forgot">
             <Link to="/">Back to log in</Link>
           </div>
-          <div className="validation">
+          <div
+            className={
+              emailValid === InputEnumEmail.emailInValid ||
+              emailValid === InputEnumEmail.signUpEmail
+                ? "validation"
+                : "d-none"
+            }
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"

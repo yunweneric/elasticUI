@@ -7,7 +7,9 @@ export const CardContainer = styled.div`
     0 15px 15px -1px rgb(0 0 0 / 10%);
   margin-top: 40px;
   padding: 40px 25px;
-
+  .d-none {
+    display: none;
+  }
   h2,
   p,
   h3,

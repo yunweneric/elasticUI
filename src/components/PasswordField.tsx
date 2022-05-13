@@ -24,7 +24,7 @@ const PasswordField: FC<PasswordInterface> = ({
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    if (page !== "login") updatePasswordUI(e.target.value);
+    if (page == "signUp") updatePasswordUI(e.target.value);
     if (page === "login") {
       if (e.target.value.length > 0) {
         setTrackBtn(BtnStates.btnEnabled);
@@ -35,6 +35,7 @@ const PasswordField: FC<PasswordInterface> = ({
   };
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     setIsPasswordText(PasswordStates.passwordFocused);
+    func(PasswordStates.passwordFocused);
   };
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -42,6 +43,9 @@ const PasswordField: FC<PasswordInterface> = ({
       setIsPasswordText(PasswordStates.passwordClean);
     } else {
       updatePasswordUI("");
+      if (page === "signUp") {
+        updatePasswordUI(e.target.value);
+      }
     }
   };
 
@@ -52,6 +56,10 @@ const PasswordField: FC<PasswordInterface> = ({
         func(PasswordStates.passwordValid);
         break;
 
+      case PasswordStates.specialCharInValid:
+        setIsPasswordText(PasswordStates.specialCharInValid);
+        func(PasswordStates.specialCharInValid);
+        break;
       case PasswordStates.passwordClean:
         setIsPasswordText(PasswordStates.passwordClean);
         func(PasswordStates.passwordClean);
@@ -87,14 +95,14 @@ const PasswordField: FC<PasswordInterface> = ({
             color:
               isPasswordText === PasswordStates.passwordClean
                 ? "white"
-                : isPasswordText !== PasswordStates.passwordValid ||
-                  page == "login"
-                ? "#36A4EF"
-                : "red",
+                : isPasswordText === PasswordStates.passwordInvalid &&
+                  page != "login"
+                ? "red"
+                : "#36A4EF",
           }}
-          htmlFor="email"
+          htmlFor="password"
         >
-          Email
+          Password
         </label>
 
         <input
